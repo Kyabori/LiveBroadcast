@@ -55,7 +55,7 @@ public class setlink implements CommandExecutor {
                         return true;
                     } else {
                         //if player does not use a valid platform
-                        player.sendMessage(prefix + "§cPlatform not valid, use 'twitch' or 'youtube' instead.");
+                        player.sendMessage(prefix + "§cPlatform not valid, use 'twitch' or 'youtube'.");
                         return false;
                     }
                 } else {
