@@ -1,0 +1,13 @@
+messages:
+  prefix: "&8[&6&lExamplePlugin&8] &7"
+  no-permission: "&cNon hai il permesso di eseguire questo comando"
+  success: "&8Hai impostato correttamente il &6&%llink% per la piattaforma %piattaforma%"
+  error: "&cAn error occurred."
+  live-message:
+    - "&8&l---------------------------------"
+    - "&5%%player% &7sta andando in live"
+    - "su %piattaforma%"
+    - "&8link: &f&l%link%"
+    - "&8&l---------------------------------"
+
+users: {}
