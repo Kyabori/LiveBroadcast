@@ -32,6 +32,7 @@ public class setlink implements CommandExecutor {
 
                         player.sendMessage(prefix + success);
                         Main.getInstance().getConfig().set("users." + player.getName() + ".link", link);
+                        platform = "twitch";
                         Main.getInstance().getConfig().set("users." + player.getName() + ".platform", platform);
                         Main.getInstance().saveConfig();
                         return true;
@@ -41,15 +42,15 @@ public class setlink implements CommandExecutor {
                         success = success.replaceAll("%player%", playerName);
 
                         //get link and replace %link% with it
-                        String link = strings[0];
-                        success = success.replaceAll("%link%", link);
+                        success = success.replaceAll("%link%", strings[0]);
 
                         //get platform and replace %platform% with it
                         String platform = getMsg.getMsg("youtube");
                         success = success.replaceAll("%platform%", platform);
 
                         player.sendMessage(prefix + success);
-                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", link);
+                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", strings[0]);
+                        platform = "twitch";
                         Main.getInstance().getConfig().set("users." + player.getName() + ".platform", platform);
                         Main.getInstance().saveConfig();
                         return true;

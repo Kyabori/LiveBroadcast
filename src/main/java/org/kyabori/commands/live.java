@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.kyabori.Main;
 import org.kyabori.getMsg;
 
 public class live implements CommandExecutor {
@@ -34,14 +33,14 @@ public class live implements CommandExecutor {
                     platform = getMsg.getMsg("youtube");
                     liveMessage = liveMessage.replaceAll("%platform%", platform);
                 }
-
-                liveMessage = liveMessage.replaceAll("%platform%", platform);
-
                 if (link != null && platform != null) {
-                    Main.getInstance().getServer().broadcastMessage(prefix + liveMessage);
+                    String[] lines = liveMessage.split("\n");
+                    for (String line : lines) {
+                        player.sendMessage(prefix + line);
+                    }
                     return true;
                 } else {
-                    player.sendMessage(prefix + "§cYou have not set your link yet, use /setlink <link> <platform> to set it.");
+                    player.sendMessage(prefix + "§cYou have not set your link yet, use /live <platform> to set it.");
                     return false;
                 }
             }
