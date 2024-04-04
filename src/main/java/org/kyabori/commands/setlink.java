@@ -1,6 +1,5 @@
 package org.kyabori.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,39 +18,54 @@ public class setlink implements CommandExecutor {
             if (player.hasPermission("everlive.setlink")) {
                 if (strings.length == 2) {
                     if (strings[1].equalsIgnoreCase("twitch")) {
-                        success = success.replaceAll("%player%", player.getName());
-                        String link = getMsg.getLink(player.getName());
+                        //get playerName and replace %player% with it
+                        String playerName = player.getName();
+                        success = success.replaceAll("%player%", playerName);
+
+                        //get link and replace %link% with it
+                        String link = strings[0];
                         success = success.replaceAll("%link%", link);
-                        String piattaforma = "Twitch";
-                        success = success.replaceAll("%piattaforma%", piattaforma);
+
+                        //get platform and replace %platform% with it
+                        String platform = getMsg.getMsg("twitch");
+                        success = success.replaceAll("%platform%", platform);
 
                         player.sendMessage(prefix + success);
-                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", strings[0]);
-                        Main.getInstance().getConfig().set("users." + player.getName() + ".piattaforma", strings[1]);
+                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", link);
+                        Main.getInstance().getConfig().set("users." + player.getName() + ".platform", platform);
                         Main.getInstance().saveConfig();
                         return true;
                     } else if (strings[1].equalsIgnoreCase("youtube")) {
-                        success = success.replaceAll("%player%", player.getName());
-                        String link = getMsg.getLink(player.getName());
+                        //get playerName and replace %player% with it
+                        String playerName = player.getName();
+                        success = success.replaceAll("%player%", playerName);
+
+                        //get link and replace %link% with it
+                        String link = strings[0];
                         success = success.replaceAll("%link%", link);
-                        String piattaforma = "YouTube";
-                        success = success.replaceAll("%piattaforma%", piattaforma);
+
+                        //get platform and replace %platform% with it
+                        String platform = getMsg.getMsg("youtube");
+                        success = success.replaceAll("%platform%", platform);
 
                         player.sendMessage(prefix + success);
-                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", strings[0]);
-                        Main.getInstance().getConfig().set("users." + player.getName() + ".piattaforma", strings[1]);
+                        Main.getInstance().getConfig().set("users." + player.getName() + ".link", link);
+                        Main.getInstance().getConfig().set("users." + player.getName() + ".platform", platform);
                         Main.getInstance().saveConfig();
                         return true;
                     } else {
-                        player.sendMessage(prefix + "§cPiattaforma non valida! Utilizza 'twitch' o 'youtube'");
+                        //if player does not use a valid platform
+                        player.sendMessage(prefix + "§cPlatform not valid, use 'twitch' or 'youtube' instead.");
                         return false;
                     }
                 } else {
-                    player.sendMessage(prefix + "§cUtilizzo: /setlink <link> <piattaforma>");
+                    //if player does not use the correct syntax
+                    player.sendMessage(prefix + "§cCorrect use: /setlink <link> <platform>");
                     return false;
                 }
             }
         } else {
+            //if sender is not a player
             commandSender.sendMessage(prefix + noperm);
             return false;
         }

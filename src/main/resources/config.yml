@@ -1,7 +1,9 @@
 messages:
   prefix: "&8[&6&lExamplePlugin&8] &7"
   no-permission: "&cNon hai il permesso di eseguire questo comando"
-  success: "&8Hai impostato correttamente il &6&%llink% per la piattaforma %piattaforma%"
+  success: "&8Hai impostato correttamente il %llink% &8per %piattaforma%"
+  twitch: "&d&lTwitch"
+  youtube: "&c&lYouTube"
   error: "&cAn error occurred."
   live-message:
     - "&8&l---------------------------------"
