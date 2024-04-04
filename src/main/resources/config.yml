@@ -1,14 +1,14 @@
 messages:
   prefix: "&8[&6&lExamplePlugin&8] &7"
-  no-permission: "&cNon hai il permesso di eseguire questo comando"
-  success: "&8Hai impostato correttamente il %llink% &8per %piattaforma%"
+  no-permission: "&cYou don't have permission to execute this command"
+  success: "&8You have successfully set the&6& %llink% for the platform %platform%"
   twitch: "&d&lTwitch"
   youtube: "&c&lYouTube"
-  error: "&cAn error occurred."
-  live-message:
+  consoleError: "&cYou can't execute this command from console"
+  livemessage:
     - "&8&l---------------------------------"
-    - "&5%%player% &7sta andando in live"
-    - "su %piattaforma%"
+    - "&5%%player% &7is going live"
+    - "on %platform%"
     - "&8link: &f&l%link%"
     - "&8&l---------------------------------"
 

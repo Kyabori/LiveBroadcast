@@ -12,22 +12,41 @@ public class live implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player) {
+            String prefix = getMsg.getMsg("prefix");
+            String liveMessage = getMsg.getMsg("livemessage");
             Player player = (Player) commandSender;
             if (player.hasPermission("everlive.live")) {
-                String playername = player.getName();
-                String link = Main.getInstance().getConfig().getString("users." + playername + ".link");
-                String piattaforma = Main.getInstance().getConfig().getString("users." + playername + ".piattaforma");
-                if (link != null && piattaforma != null) {
-                    String prefix = getMsg.getMsg("prefix");
-                    Main.getInstance().getServer().broadcastMessage(prefix + "§6" + playername + " §7sta andando in live su §6" + piattaforma + "§7! Guardalo qui: §6" + link);
+                //get playerName and replace %player% with it
+                String playerName = player.getName();
+                liveMessage = liveMessage.replaceAll("%player%", playerName);
+
+                //get link and replace %link% with it
+                String link = getMsg.getLink(playerName);
+                liveMessage = liveMessage.replaceAll("%link%", link);
+
+                //get platform and replace %platform% with it
+                String rawPlatform = getMsg.getPlatform(playerName);
+                String platform = "";
+                if (rawPlatform.equalsIgnoreCase("twitch")) {
+                    platform = getMsg.getMsg("twitch");
+                    liveMessage = liveMessage.replaceAll("%platform%", platform);
+                } else if (rawPlatform.equalsIgnoreCase("youtube")) {
+                    platform = getMsg.getMsg("youtube");
+                    liveMessage = liveMessage.replaceAll("%platform%", platform);
+                }
+
+                liveMessage = liveMessage.replaceAll("%platform%", platform);
+
+                if (link != null && platform != null) {
+                    Main.getInstance().getServer().broadcastMessage(prefix + liveMessage);
                     return true;
                 } else {
-                    player.sendMessage(ChatColor.RED + "Non hai impostato alcun link! Impostalo con /setlink <link> <piattaforma>");
+                    player.sendMessage(prefix + "§cYou have not set your link yet, use /setlink <link> <platform> to set it.");
                     return false;
                 }
             }
         } else {
-            commandSender.sendMessage(ChatColor.RED + "Non puoi eseguire questo comando da console!");
+            commandSender.sendMessage(ChatColor.RED + "You must be a player to use this command.");
             return false;
         }
         return false;

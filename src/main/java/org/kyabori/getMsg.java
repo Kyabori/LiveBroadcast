@@ -9,4 +9,8 @@ public class getMsg extends JavaPlugin{
     public static @NotNull String getLink(String key) {
         return Main.getInstance().getConfig().getString("users." + key + ".link");
     }
+
+    public static @NotNull String getPlatform(String key) {
+        return Main.getInstance().getConfig().getString("users." + key + ".platform");
+    }
 }
